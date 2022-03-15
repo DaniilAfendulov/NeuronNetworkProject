@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeuronNetworkProject.ActivationFunctions
+namespace NeuronNetworkProject
 {
     public class LinearFunction : IActivationFunction
     {
