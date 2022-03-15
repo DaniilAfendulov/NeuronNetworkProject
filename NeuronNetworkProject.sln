@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuronNetworkLibrary", "NeuronNetworkLibrary\NeuronNetworkLibrary.csproj", "{CC634531-FEE7-4697-B8C2-318A7CB28E0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTests", "ConsoleTests\ConsoleTests.csproj", "{0E26E85D-41FB-4422-AA23-BC0B474862E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC634531-FEE7-4697-B8C2-318A7CB28E0C} = {CC634531-FEE7-4697-B8C2-318A7CB28E0C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{CC634531-FEE7-4697-B8C2-318A7CB28E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC634531-FEE7-4697-B8C2-318A7CB28E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC634531-FEE7-4697-B8C2-318A7CB28E0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E26E85D-41FB-4422-AA23-BC0B474862E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E26E85D-41FB-4422-AA23-BC0B474862E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E26E85D-41FB-4422-AA23-BC0B474862E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E26E85D-41FB-4422-AA23-BC0B474862E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
