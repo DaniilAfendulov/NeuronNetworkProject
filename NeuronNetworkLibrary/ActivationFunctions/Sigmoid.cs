@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NeuronNetworkProject.ActivationFunctions
+namespace NeuronNetworkProject
 {
     public class Sigmoid : IActivationFunction
     {
