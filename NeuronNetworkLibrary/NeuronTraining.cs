@@ -56,22 +56,5 @@ namespace NeuronNetworkProject
                 neurons[i].Training(data[i], eraAmount, eta, Emin, Emax);
             }
         }
-
-        public static void Training(this Neuron[][] neuronlayers, Tuple<double[], double>[] data,
-            double eraAmount,
-            double eta = 0.4, double Emin = double.MinValue, double Emax = double.MaxValue)
-        {
-            double[][] o = new double[neuronlayers.Length][];
-            double[] prev = data[0].Item1;
-            for (int i = 0; i < neuronlayers.Length; i++)
-            {
-                o[i] = neuronlayers[i].Select(n => n.Calc(prev)).ToArray();
-                prev = o[i];
-            }
-            // TODO: 
-           // neuronlayers[neuronlayers.Length-1].Select(n => n.Omegas = n.Omegas.Select)
-
-
-        }
     }
 }
