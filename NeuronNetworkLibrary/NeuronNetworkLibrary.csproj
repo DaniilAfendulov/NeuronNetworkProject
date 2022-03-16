@@ -46,6 +46,7 @@
     <Compile Include="ActivationFunctions\Sigmoid.cs" />
     <Compile Include="FullyConnectedNetwork.cs" />
     <Compile Include="MultilayerNetwork.cs" />
+    <Compile Include="MultilayerNetwork2.cs" />
     <Compile Include="Neuron.cs" />
     <Compile Include="NeuronNetwork.cs" />
     <Compile Include="NeuronTraining.cs" />
