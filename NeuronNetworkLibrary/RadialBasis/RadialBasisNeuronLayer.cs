@@ -26,10 +26,28 @@ namespace NeuronNetworkLibrary
             return _headNeuron.Calc(y);
         }
 
+        public double Calc(double[] input)
+        {
+            double[] y = _neurons.Select(n => n.Calc(input, _S)).ToArray();
+            return _headNeuron.Calc(y);
+        }
+
         public void Training(Tuple<double, double>[] data, int eraAmount, double eta = 0.1)
         {
             _S = data.Select(s => s.Item1).Sum() / data.Length;
             _S /= 10; // нужно подбирать
+            Tuple<double[], double>[] datas = data
+                .Select(d => new Tuple<double[], double>(
+                    _neurons.Select(n => n.Calc(d.Item1, _S)).ToArray(),
+                    d.Item2))
+                .ToArray();
+            _headNeuron.Training(datas, eraAmount, eta);
+        }
+
+        public void Training(Tuple<double[], double>[] data, int eraAmount, double eta = 0.1)
+        {
+            _S = data.Select(s => s.Item1.Sum()).Sum() / data.Length;
+            _S *= 10; // нужно подбирать
             Tuple<double[], double>[] datas = data
                 .Select(d => new Tuple<double[], double>(
                     _neurons.Select(n => n.Calc(d.Item1, _S)).ToArray(),

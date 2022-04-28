@@ -108,21 +108,30 @@ namespace AIShower
         private void RadialBasisTest()
         {
             List<RadialBasisNeuron> neurons = new List<RadialBasisNeuron>();
-            List<Tuple<double, double>> data = new List<Tuple<double, double>>();
-            for (double i = 0; i < 10; i++)
+            List<Tuple<double[], double>> data = new List<Tuple<double[], double>>();
+            for (double i = 0; i < Math.PI; i += 0.5)
             {
-                data.Add(new Tuple<double, double>(i, i * 2));
-                neurons.Add(new RadialBasisNeuron(new double[] { i }));
+                for (double z = -4; z < 4; z++)
+                {
+                    data.Add(new Tuple<double[], double>(new double[] { i, z }, z*Math.Cos(i)));
+                    neurons.Add(new RadialBasisNeuron(new double[] { i, z }));
+                }
             }
             RadialBasisNeuronLayer neuronLayer = new RadialBasisNeuronLayer(neurons.ToArray());
-            neuronLayer.Training(data.ToArray(), 100000, 0.05);
+            neuronLayer.Training(data.ToArray(), 10000, 0.05);
 
             List<Tuple<double, double>> points = new List<Tuple<double, double>>();
-            for (double i = 0; i < 20; i += 0.05)
+            for (int z = -5; z < 5; z++)
             {
-                points.Add(new Tuple<double, double>(i, neuronLayer.Calc(i)));
+                for (double i = 0; i < Math.PI * 2; i += 0.01)
+                {
+                    points.Add(new Tuple<double, double>(i, neuronLayer.Calc(new double[] { i, z })));
+                }
+                Draw("RadialBasis_z="+z, points, 10);
+                points.Clear();
             }
-            Draw("RadialBasis", points, 10);
+
+
         }
     }
 }
