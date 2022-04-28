@@ -7,7 +7,7 @@ namespace NeuronNetworkProject
     {
         private readonly IActivationFunction _activationFunction;
         private double[] _omegas;
-        private double _offset;
+        public double Offset;
 
         public IActivationFunction ActivationFunction { get { return _activationFunction; } }
         public double[] Omegas
@@ -22,7 +22,7 @@ namespace NeuronNetworkProject
             _activationFunction = activationFunction;
             if(omegas == null) throw new ArgumentNullException("omegas");
             _omegas = omegas;
-            _offset = offset;
+            Offset = offset;
         }
 
         public double Calc(double[] inputs)
@@ -36,7 +36,7 @@ namespace NeuronNetworkProject
                 changedInputs[i] = _omegas[i] * inputs[i];
             }
 
-            double sum = changedInputs.Sum() + _offset;
+            double sum = changedInputs.Sum() + Offset;
 
             return _activationFunction.Calc(sum);
         }

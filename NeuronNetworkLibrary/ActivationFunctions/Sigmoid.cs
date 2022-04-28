@@ -12,7 +12,7 @@ namespace NeuronNetworkProject
 
         public double GetDelta(double y, double o)
         {
-            return (y - o) * o * (1 - 0);
+            return (y - o) * o * (1 - o);
         }
     }
 }

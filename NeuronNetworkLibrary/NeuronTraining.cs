@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeuronNetworkLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,7 @@ namespace NeuronNetworkProject
                     {
                         neuron.Omegas[i] = neuron.Omegas[i] + eta * delta * x[i];
                     }
+                    neuron.Offset = neuron.Offset + eta * delta;
                 }
 
                 if (E <= Emin || E >= Emax)
@@ -56,5 +58,35 @@ namespace NeuronNetworkProject
                 neurons[i].Training(data[i], eraAmount, eta, Emin, Emax);
             }
         }
+
+        public static void KohonenLayerTraining(this KohonenNeuron[] layer, double[][] data, int eraAmount, double eta = 0.2)
+        {
+            for (int i = 0; i < eraAmount; i++)
+            {
+                for (int j = 0; j < data.Length; j++)
+                {
+                    int index = FindClosestKohonenNeuronIndex(layer, data[j]);
+                    layer[index].Train(data[j], eta);
+                }
+            }
+
+        }
+
+        public static int FindClosestKohonenNeuronIndex(KohonenNeuron[] neurons, double[] data) 
+        {
+            int index = 0;
+            double value = neurons[0].CalcScalarProduct(data);
+            for (int i = 1; i < neurons.Length; i++)
+            {
+                var currentValue = neurons[i].CalcScalarProduct(data);
+                if (value < currentValue)
+                {
+                    index = i;
+                    value = currentValue;
+                }
+            }
+            return index;
+        }
+
     }
 }

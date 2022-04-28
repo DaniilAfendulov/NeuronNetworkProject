@@ -45,11 +45,15 @@
     <Compile Include="ActivationFunctions\LinearFunction.cs" />
     <Compile Include="ActivationFunctions\Sigmoid.cs" />
     <Compile Include="FullyConnectedNetwork.cs" />
+    <Compile Include="KohonenNeuron.cs" />
     <Compile Include="MultilayerNetwork.cs" />
     <Compile Include="Neuron.cs" />
     <Compile Include="NeuronNetwork.cs" />
     <Compile Include="NeuronTraining.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadialBasis\RadialBasisNeuron.cs" />
+    <Compile Include="RadialBasis\RadialBasisNeuronLayer.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NeuronNetworkProject;
+using NeuronNetworkLibrary;
 
 namespace ConsoleTests
 {
@@ -11,7 +12,7 @@ namespace ConsoleTests
     {
         static void Main(string[] args)
         {
-            ChangeOmegasTest();
+            RadialBasisTest();
             Console.ReadLine();
         }
 
@@ -90,5 +91,59 @@ namespace ConsoleTests
             neuron.Omegas[0] = 10;
             ShowOmegas(neuron);
         }
+
+        public static void KohonenTest()
+        {
+            var layer = new KohonenNeuron[]
+            {
+                new KohonenNeuron(2),
+                new KohonenNeuron(2),
+                new KohonenNeuron(2),
+                new KohonenNeuron(2)
+            };
+
+            Tuple<double, double>[] c = new Tuple<double, double>[]
+            {
+                new Tuple<double, double>(100, 100),
+                new Tuple<double, double>(-100, -100),
+                new Tuple<double, double>(100, -100),
+                new Tuple<double, double>(-100, 100)
+            };
+
+            var r = new Random();
+            var datalen = 1000;
+            var data = new double[datalen][];
+            for (int i = 0; i < datalen; i++)
+            {
+                int index = r.Next(c.Length);
+                data[i] = new double[] { c[index].Item1 + r.NextDouble() - 0.5, c[index].Item2 + r.NextDouble() - 0.5 };
+            }
+
+            layer.KohonenLayerTraining(data, 1000);
+
+
+
+        }
+
+        public static void RadialBasisTest()
+        {
+            List<RadialBasisNeuron> neurons = new List<RadialBasisNeuron>();            
+            List<Tuple<double, double>> data = new List<Tuple<double, double>>();
+            for (double i = 0; i < 10; i++)
+            {
+                data.Add(new Tuple<double, double>(i, i * 2));
+                neurons.Add(new RadialBasisNeuron(new double[] { i }));
+            }
+            RadialBasisNeuronLayer neuronLayer = new RadialBasisNeuronLayer(neurons.ToArray());
+            neuronLayer.Training(data.ToArray(), 100000, 0.005);
+
+            for (double i = 5; i < 10; i+=0.1)
+            {
+                Console.WriteLine("i=" + i + "\tr=" + neuronLayer.Calc(i));
+            }
+
+        }
+
+
     }
 }
